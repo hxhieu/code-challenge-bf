@@ -1,17 +1,29 @@
 ﻿using CodeChallengeBF.Service.Contract;
+using MemoryPack;
+using System.Collections.Concurrent;
 
 namespace CodeChallengeBF.Service
 {
     public class SimpleMemCache : ICache
     {
-        public Task<T> Get<T>(string key)
+        private static readonly ConcurrentDictionary<string, byte[]> _cache = new();
+
+        public Task<T?> Get<T>( string key ) where T : class
         {
-            throw new NotImplementedException();
+            if (_cache.TryGetValue( key, out byte[] buf ))
+            {
+                return Task.FromResult( MemoryPackSerializer.Deserialize<T>( buf ) );
+            }
+            return Task.FromResult( default( T ) );
         }
 
-        public Task Upsert<T>(string key, T value)
+        public Task Upsert<T>( string key, T value ) where T : class
         {
-            throw new NotImplementedException();
+            if (!_cache.TryAdd( key, MemoryPackSerializer.Serialize( value ) ))
+            {
+                throw new Exception( "Could not add to cache" );
+            }
+            return Task.CompletedTask;
         }
     }
 }

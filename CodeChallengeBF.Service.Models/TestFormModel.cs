@@ -1,9 +1,11 @@
-﻿namespace CodeChallengeBF.Service.Models
+﻿using MemoryPack;
+
+namespace CodeChallengeBF.Service.Models
 {
-    public class TestFormModel
+    [MemoryPackable]
+    public partial class TestFormModel
     {
         public string FirstName { get; set; } = string.Empty;
         public string LastName { get; set; } = string.Empty;
-        public string Id => string.Format("{0}_{1}", FirstName, LastName).ToLower();
     }
 }

@@ -2,7 +2,7 @@
 {
     internal interface ICache
     {
-        Task<T> Get<T>(string key);
-        Task Upsert<T>(string key, T value);
+        Task<T?> Get<T>( string key ) where T : class;
+        Task Upsert<T>( string key, T value ) where T : class;
     }
 }
