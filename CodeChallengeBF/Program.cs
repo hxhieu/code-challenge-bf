@@ -1,7 +1,7 @@
 using CodeChallengeBF.Infra.Middlewares;
 using CodeChallengeBF.Service;
 
-var builder = WebApplication.CreateBuilder(args);
+var builder = WebApplication.CreateBuilder( args );
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
@@ -17,8 +17,8 @@ app.UseRouting();
 
 app.MapControllerRoute(
     name: "default",
-    pattern: "{controller}/{action=Index}/{id?}");
+    pattern: "{controller}/{action=Index}/{id?}" );
 
-app.MapFallbackToFile("index.html"); ;
+app.MapFallbackToFile( "index.html" );
 
 app.Run();
