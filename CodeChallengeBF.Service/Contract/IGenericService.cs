@@ -2,7 +2,7 @@
 {
     public interface IGenericService<T>
     {
-        Task Upsert(Func<T,bool> predicate, params T[] values);
-        Task Delete(Func<T, bool> predicate);
+        Task Upsert(params T[] values);
+        Task Delete(params T[] values);
     }
 }
