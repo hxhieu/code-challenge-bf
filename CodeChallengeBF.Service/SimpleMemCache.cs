@@ -6,7 +6,12 @@ namespace CodeChallengeBF.Service
 {
     public class SimpleMemCache : ICache
     {
-        private static readonly ConcurrentDictionary<string, byte[]> _cache = new();
+        private readonly ConcurrentDictionary<string, byte[]> _cache = new();
+
+        public int Count()
+        {
+            return _cache.Count;
+        }
 
         public Task<T?> Get<T>( string key ) where T : class
         {

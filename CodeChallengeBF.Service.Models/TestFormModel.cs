@@ -7,5 +7,8 @@ namespace CodeChallengeBF.Service.Models
     {
         public string FirstName { get; set; } = string.Empty;
         public string LastName { get; set; } = string.Empty;
+
+        [MemoryPackIgnore]
+        public string Id => string.Format( "{0}_{1}", FirstName ?? "", LastName ?? "" ).ToLower();
     }
 }

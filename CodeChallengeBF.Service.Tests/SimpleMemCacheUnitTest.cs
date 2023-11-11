@@ -14,9 +14,8 @@ namespace CodeChallengeBF.Service.Tests
                 FirstName = "hello",
                 LastName = "world"
             };
-            var key = expected.GetHashCode().ToString();
-            await cache.Upsert( key, expected );
-            var result = await cache.Get<TestFormModel>( key );
+            await cache.Upsert( expected.Id, expected );
+            var result = await cache.Get<TestFormModel>( expected.Id );
             Assert.IsNotNull( result );
             Assert.AreEqual( expected.FirstName, result.FirstName );
             Assert.AreEqual( expected.LastName, result.LastName );

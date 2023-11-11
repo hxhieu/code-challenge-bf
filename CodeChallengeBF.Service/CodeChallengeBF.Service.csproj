@@ -7,10 +7,13 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="AutoMapper" Version="12.0.1" />
     <PackageReference Include="MemoryPack" Version="1.10.0" />
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\CodeChallengeBF.Data.Entity\CodeChallengeBF.Data.Entity.csproj" />
+    <ProjectReference Include="..\CodeChallengeBF.Data\CodeChallengeBF.Data.csproj" />
     <ProjectReference Include="..\CodeChallengeBF.Service.Models\CodeChallengeBF.Service.Models.csproj" />
   </ItemGroup>
 
