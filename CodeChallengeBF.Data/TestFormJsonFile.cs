@@ -10,6 +10,8 @@ namespace CodeChallengeBF.Data
         // Only 1 thread can enter the code, if this is locked
         private static readonly SemaphoreSlim _lock = new( 1, 1 );
 
+        public string RepoType => string.Format( "JSON FILE: '{0}'", Path.GetFullPath( FILE_NAME ) );
+
         public Task<List<TestFormEntity>> All()
         {
             var formValues = new List<TestFormEntity>();

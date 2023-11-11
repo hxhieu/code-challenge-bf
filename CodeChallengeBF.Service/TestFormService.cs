@@ -19,6 +19,8 @@ namespace CodeChallengeBF.Service
             _mapper = mapper;
         }
 
+        public string RepoType => _repo.RepoType ?? string.Empty;
+
         public Task Delete( params TestFormModel[] values )
         {
             throw new NotImplementedException( "Not required for this challenge" );
