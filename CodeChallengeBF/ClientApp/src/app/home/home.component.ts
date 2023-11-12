@@ -1,10 +1,11 @@
 import { Component } from '@angular/core';
-import {  FormBuilder } from '@angular/forms';
+import { FormBuilder, Validators } from '@angular/forms';
 import { TestFormService } from './test-form.service';
 
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
+  styleUrls: ['./home.component.css'],
 })
 export class HomeComponent {
   constructor(
@@ -12,12 +13,15 @@ export class HomeComponent {
     private readonly formBuilder: FormBuilder
   ) {}
 
-  testForm = this.formBuilder.group({
-    firstName: '',
-    lastName: '',
+  testForm = this.formBuilder.nonNullable.group({
+    firstName: ['', [Validators.required]],
+    lastName: ['', [Validators.required]],
   });
 
   onSubmit(): void {
+    if (!this.testForm.valid) {
+      return;
+    }
     this.testFormService.sendTestForm(this.testForm.value);
   }
 }

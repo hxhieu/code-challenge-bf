@@ -20,10 +20,10 @@ namespace CodeChallengeBF.Controllers
         [HttpPost]
         public async Task<IActionResult> Post( TestFormModel value )
         {
-            // TestFormService utilises a cache, so it won't insert same form to the storag
+            // TestFormService utilises a cache, so it won't insert same form to the storage
             await _testFormService.Upsert( value );
             _logger.LogInformation( "Value saved to -> {0}", _testFormService.RepoType );
-            return Ok();
+            return Ok(value);
         }
     }
 }

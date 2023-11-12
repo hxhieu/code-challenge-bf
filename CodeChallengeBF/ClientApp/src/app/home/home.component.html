@@ -1,13 +1,56 @@
 <h1>Test Form</h1>
-<form [formGroup]="testForm" (ngSubmit)="onSubmit()">
-  <div>
-    <label for="firstName"> First Name </label>
-    <input id="firstName" type="text" formControlName="firstName" />
-  </div>
+<div class="row">
+  <div class="col col-lg-6">
+    <form [formGroup]="testForm" (ngSubmit)="onSubmit()">
+      <div class="form-group">
+        <label for="firstName">
+          First Name<span class="required-asterisk">*</span>
+        </label>
+        <input
+          id="firstName"
+          type="text"
+          formControlName="firstName"
+          class="form-control"
+        />
+        <span
+          class="text-danger"
+          *ngIf="
+            testForm.dirty &&
+            testForm.get('firstName')?.errors &&
+            testForm.get('firstName')?.hasError('required')
+          "
+          >First Name is required</span
+        >
+      </div>
 
-  <div>
-    <label for="lastName"> Last Name </label>
-    <input id="lastName" type="text" formControlName="lastName" />
+      <div class="form-group">
+        <label for="lastName">
+          Last Name<span class="required-asterisk">*</span>
+        </label>
+        <input
+          id="lastName"
+          type="text"
+          formControlName="lastName"
+          class="form-control"
+        />
+        <span
+          class="text-danger"
+          *ngIf="
+            testForm.dirty &&
+            testForm.get('lastName')?.errors &&
+            testForm.get('lastName')?.hasError('required')
+          "
+          >Last Name is required</span
+        >
+      </div>
+      <button
+        class="button"
+        [disabled]="!testForm.valid"
+        type="submit"
+        class="btn btn-primary"
+      >
+        Send
+      </button>
+    </form>
   </div>
-  <button class="button" type="submit">Send</button>
-</form>
+</div>

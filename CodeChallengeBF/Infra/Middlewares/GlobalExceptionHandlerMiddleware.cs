@@ -26,10 +26,11 @@ namespace CodeChallengeBF.Infra.Middlewares
                 _logger.LogError( string.Format( "error during executing '{0} {1}'", context.Request.Method, context.Request.Path.Value ), exception );
                 var response = context.Response;
                 response.ContentType = "application/json";
+                // TODO: Can check the exception type for more accurate status code
                 response.StatusCode = (int)HttpStatusCode.InternalServerError;
                 await response.WriteAsync( JsonSerializer.Serialize( new
                 {
-                    errorMessage = exception.Message,
+                    error = exception.Message,
                     errorType = exception.GetType().Name
                 } ) );
             }
