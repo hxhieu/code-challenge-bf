@@ -53,7 +53,7 @@ namespace CodeChallengeBF.Service
                     continue;
                 }
                 await _cache.Upsert( value.Id, value );
-                await _repo.Insert( _mapper.Map<TestFormEntity>( value ) );
+                await _repo.Upsert( _mapper.Map<TestFormEntity>( value ) );
             }
         }
     }

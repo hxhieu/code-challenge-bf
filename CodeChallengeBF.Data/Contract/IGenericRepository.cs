@@ -3,8 +3,7 @@
     public interface IGenericRepository<T>
     {
         string RepoType { get; }
-        Task<T> Insert(T entity);
-        Task<T> Update(T entity);
+        Task<T> Upsert(T entity);
         Task Delete(T entity);
         Task<List<T>> All(); 
     }

@@ -31,7 +31,7 @@ namespace CodeChallengeBF.Data
             throw new NotImplementedException( "Not required for this challenge" );
         }
 
-        public async Task<TestFormEntity> Insert( TestFormEntity entity )
+        public async Task<TestFormEntity> Upsert( TestFormEntity entity )
         {
             // Lock file writing
             // We need a semaphore because we also doing some async inside the lock
@@ -50,11 +50,6 @@ namespace CodeChallengeBF.Data
             {
                 _lock.Release();
             }
-        }
-
-        public Task<TestFormEntity> Update( TestFormEntity entity )
-        {
-            throw new NotImplementedException( "Not required for this challenge" );
         }
     }
 }
