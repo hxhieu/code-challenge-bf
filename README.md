@@ -1,3 +1,5 @@
+![build badge](https://github.com/hxhieu/code-challenge-bf/actions/workflows/just-build.yml/badge.svg)
+
 # How to run
 
 - Open the `CodeChallengeBF.sln` with Visual Studio 2022
