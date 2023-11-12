@@ -1,5 +1,6 @@
 using CodeChallengeBF.Infra.Middlewares;
 using CodeChallengeBF.Service;
+using CodeChallengeBF.Service.Contract;
 
 var builder = WebApplication.CreateBuilder( args );
 
@@ -10,6 +11,14 @@ builder.Services.AddControllersWithViews();
 builder.Services.RegisterServices();
 
 var app = builder.Build();
+
+// Do some starting up
+var testFormService = app.Services.GetService<ITestFormService>();
+if (testFormService != null)
+{
+    // Load the cache from the JSON file
+    await testFormService.InitCache();
+}
 
 app.UseMiddleware<GlobalExceptionHandlerMiddleware>();
 app.UseStaticFiles();

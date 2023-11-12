@@ -10,7 +10,7 @@ namespace CodeChallengeBF.Service
         {
             // Just map by naming convention
             CreateMap<TestFormModel, TestFormEntity>()
-                .IgnoreAllSourcePropertiesWithAnInaccessibleSetter()
+                .IgnoreAllPropertiesWithAnInaccessibleSetter()
                 .ReverseMap();
         }
     }

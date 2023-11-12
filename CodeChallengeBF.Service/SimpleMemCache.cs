@@ -24,10 +24,7 @@ namespace CodeChallengeBF.Service
 
         public Task Upsert<T>( string key, T value ) where T : class
         {
-            if (!_cache.TryAdd( key, MemoryPackSerializer.Serialize( value ) ))
-            {
-                throw new Exception( "Could not add to cache" );
-            }
+            _cache.TryAdd( key, MemoryPackSerializer.Serialize( value ) );
             return Task.CompletedTask;
         }
     }

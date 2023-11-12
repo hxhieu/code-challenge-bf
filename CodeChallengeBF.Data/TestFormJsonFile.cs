@@ -21,7 +21,7 @@ namespace CodeChallengeBF.Data
                 var json = File.ReadAllText( FILE_NAME );
                 formValues = JsonSerializer.Deserialize<List<TestFormEntity>>( json ) ?? new List<TestFormEntity>();
             }
-            catch {/* Could not parse the file then just do nothing and reset it */}
+            catch {/* Could not parse the file then just do nothing and just reset it */}
 
             return Task.FromResult( formValues );
         }
@@ -33,12 +33,17 @@ namespace CodeChallengeBF.Data
 
         public async Task<TestFormEntity> Insert( TestFormEntity entity )
         {
+            // Lock file writing
+            // We need a semaphore because we also doing some async inside the lock
             await _lock.WaitAsync();
             try
             {
                 var formValues = await All();
-                formValues.Add( entity );
-                File.WriteAllText( FILE_NAME, JsonSerializer.Serialize( formValues ) );
+                if (!formValues.Exists( x => x.Id == entity.Id ))
+                {
+                    formValues.Add( entity );
+                    File.WriteAllText( FILE_NAME, JsonSerializer.Serialize( formValues ) );
+                }
                 return entity;
             }
             finally
