@@ -2,7 +2,6 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, catchError, of } from 'rxjs';
 import { ToastrService } from 'ngx-toastr';
-import { environment } from 'src/environments/environment';
 
 export interface TestForm {
   firstName?: string;
@@ -13,10 +12,7 @@ export interface TestForm {
   providedIn: 'root',
 })
 export class TestFormService {
-  private readonly _baseUrl: string;
-  constructor(private http: HttpClient, private toast: ToastrService) {
-    this._baseUrl = environment.apiBaseUrl;
-  }
+  constructor(private http: HttpClient, private toast: ToastrService) {}
 
   private handleError<T>() {
     return (err: any): Observable<T> => {
@@ -31,7 +27,7 @@ export class TestFormService {
 
   public sendTestForm(form: TestForm) {
     this.http
-      .post<TestForm>(this._baseUrl + '/testform', form)
+      .post<TestForm>('/testform', form)
       .pipe(catchError(this.handleError()))
       .subscribe((x) => {
         if (x) {
